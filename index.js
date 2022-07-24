@@ -40,17 +40,28 @@ function iniciarJuego() {
 function seleccionarMascotaJugador() {
 	const mascotaJugador = document.querySelector('#mascota-jugador');
 	const mascotaEnemigo = document.querySelector('#mascota-enemigo');
+    const btnMascota = document.querySelector('#boton-mascota');
+    const radioBtns = document.querySelectorAll("input[name=mascota]");
 	let mascotaSelected = '';
 
 	if (hipodoge.checked) {
-		alert('Hipodoge selected');
+        mascotaSelected = 'Hipodoge';
 	} else if (capipepo.checked) {
 		mascotaSelected = 'Capipepo';
 	} else if (ratigueya.checked) {
 		mascotaSelected = 'Ratigueya';
 	} else {
+        mascotaSelected = '';
 		alert('Ningun mokepon selecccionado');
 	}
+
+    if ( mascotaSelected !== '') {
+        btnMascota.setAttribute('disabled', true);
+        const arrayBtns = [...radioBtns];
+        arrayBtns.forEach( a => {
+            a.disabled = true;
+        });
+    }
 
 	mascotaJugador.innerHTML = mascotaSelected;
 	mascotaEnemigo.innerHTML = seleccionarMascotaEnemigo();
@@ -161,6 +172,16 @@ function reiniciarBtn() {
     const vidasMascota = document.querySelector("#vidas-mascota");
     const vidasMascotaEnemigo = document.querySelector("#vidas-enemigo");
 
+    const btnMascota = document.querySelector('#boton-mascota');
+    const radioBtns = document.querySelectorAll("input[name=mascota]");
+
+    const arrayBtns = [...radioBtns];
+
+    btnMascota.disabled = false;
+
+    arrayBtns.forEach( a => {
+        a.disabled = false;
+    })
     
 	vidasJugador = 3;
 	vidasEnemigo = 3;
